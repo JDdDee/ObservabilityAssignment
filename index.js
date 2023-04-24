@@ -19,10 +19,14 @@ const startServer = async () => {
 };
 startServer();
 app.get("/todo", async (req, res) => {
+   //const span = tracer.startSpan("getTodos");
    const todos = await db.collection("todos").find({}).toArray();
+   //span.end();
    res.send(todos);
 });
 app.get("/todo/:id", async (req, res) => {
+   //const span = tracer.startSpan("getTodoById");
    const todo = await db.collection("todos").findOne({ id: req.params.id });
+   //span.end();
    res.send(todo);
 });
